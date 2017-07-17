@@ -2,16 +2,15 @@ var express = require('express');
 var router = express.Router();
 
 app.get('/cookie',function(req, res){
-     res.cookie(contador , 'numero').send('Cookie is set');
+     res.cookie('contador' , req.params.contador);
 });
 
 app.get('/', function(req, res) {
-  console.log("Cookies :  ", req.cookies);
+  res.send(req.cookies.contador);
 });
 
 app.get('/clearcookie', function(req,res){
-     clearCookie('cookie_name');
-     res.send('Cookie deleted');
+     clearCookie('contador');
 });
 
 module.exports = router;
