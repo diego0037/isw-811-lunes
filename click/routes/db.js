@@ -18,15 +18,13 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-  var db = models.db.create(req.body);
+  var db = models.dbs.create(req.body);
   res.format({
     json: function () {
-      db.then(db => {
-      });
+      db.then(db => {res.json(db)});
     },
     html: function () {
-      db.then(db => {
-      });
+      db.then(db => {res.redirect('/')});
     }
   })
 });
@@ -35,13 +33,13 @@ router.post('/', function(req, res, next) {
 router.put('/:id', function(req, res, next) {
   res.format({
     json: function() {
-      models.db.update({ where: {id: req.params.id} }).then(() => {
-        res.json({status: 'ok'});
+      models.dbs.update(req.body,{ where: {id: req.params.id} }).then(db => {
+        res.json({db:db});
       });
     },
     html: function () {
-      models.db.update({ where: {id: req.params.id} }).then(() => {
-        res.redirect('/index' + req.params.id);
+      models.dbs.update(req.body,{ where: {id: req.params.id} }).then(db => {
+        res.redirect('/', {db:db});
       });
     }
   });
