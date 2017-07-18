@@ -36,5 +36,8 @@ $(document).ready(function() {
     }
     count++;
     BD.update(id, {count: count}).done(refresh);
-  })
+  });
+  $('#db_reset').click(function(event){
+    BD.update(id, {count: 0}).done(refresh);
+  });
 })
