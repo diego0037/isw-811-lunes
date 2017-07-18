@@ -5,12 +5,12 @@ var models = require('../models');
 router.get('/', function(req, res, next) {
   res.format({
     json: function () {
-      models.db.all().then(db => {
+      models.dbs.all().then(db => {
         res.json({db: db});
       });
     },
     html: function () {
-      models.db.all().then(mesa => {
+      models.dbs.all().then(db => {
         res.render('/index', { db: db });
       });
     }

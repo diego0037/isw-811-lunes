@@ -1,3 +1,4 @@
+var id = 0;
 var BD = {
   getData: function() {
     return $.getJSON('/api/v1/db');
@@ -17,9 +18,15 @@ var BD = {
 
 var refresh = function () {
   BD.getData().done(function (json) {
+    $('.db').attr("id",'0');
     json.db.forEach(function(db) {
-     $('#bd').text(db.count); 
+      id = db.id;
+      $('#bd').text(db.count); 
     });
   })
-}
+};
+
+$(document).ready(function() {
+  refresh();  
+})
 
