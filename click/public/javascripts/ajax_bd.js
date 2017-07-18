@@ -1,15 +1,15 @@
 var id = 0;
 var count = 0;
-var BD = {
+var Clicks = {
   getData: function() {
-    return $.getJSON('/api/v1/db');
+    return $.getJSON('/api/v1/clicks');
   },
   insert: function (data) {
-    return $.post('/api/v1/db', data);
+    return $.post('/api/v1/clicks', data);
   },
   update: function (id, data) {
     return $.ajax({
-      url: '/api/v1/db/' + id,
+      url: '/api/v1/clicks/' + id,
       type: 'PUT',
       dataType: 'json',
       data: data,
@@ -18,26 +18,26 @@ var BD = {
 };
 
 var refresh = function () {
-  BD.getData().done(function (json) {
-    json.db.forEach(function(db) {
-      id = db.id;
-      count = db.count;
-      $('#db').text(count);
+  Clicks.getData().done(function (json) {
+    json.clicks.forEach(function(click) {
+      id = click.id;
+      count = click.count;
+      $('#click').text(count);
     });
   })
 };
 
 $(document).ready(function() {
   refresh();
-  $('#db').click(function(event){
+  $('#click').click(function(event){
     if(id==0){
-      BD.insert({count:1}).done(refresh);
+      Clicks.insert({count:1}).done(refresh);
       return;
     }
     count++;
-    BD.update(id, {count: count}).done(refresh);
+    Clicks.update(id, {count: count}).done(refresh);
   });
-  $('#db_reset').click(function(event){
-    BD.update(id, {count: 0}).done(refresh);
+  $('#click_reset').click(function(event){
+    Clicks.update(id, {count: 0}).done(refresh);
   });
 })

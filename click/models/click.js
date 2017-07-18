@@ -1,7 +1,7 @@
 module.exports = function(sequelize, DataTypes) {
-	var Db = sequelize.define('dbs', {
+	var Click = sequelize.define('clicks', {
 		 count: DataTypes.INTEGER
 	});
 
-	return Db;
+	return Click;
 }
