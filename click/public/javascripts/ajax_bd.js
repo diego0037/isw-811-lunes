@@ -20,17 +20,18 @@ var refresh = function () {
   BD.getData().done(function (json) {
     json.db.forEach(function(db) {
       id = db.id;
-      $('#bd').text(db.count); 
+      $('#bd').text(db.count);
     });
   })
 };
 
 $(document).ready(function() {
-  refresh();  
+  refresh();
   $('.db').click(function(event){
     if(id!=0){
       BD.insert({count:1}).done(refresh);
+      return;
     }
+    BD.update(id, {count: count});
   })
 })
-
