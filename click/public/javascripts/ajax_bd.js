@@ -18,7 +18,6 @@ var BD = {
 
 var refresh = function () {
   BD.getData().done(function (json) {
-    $('.db').attr("id",'0');
     json.db.forEach(function(db) {
       id = db.id;
       $('#bd').text(db.count); 
@@ -28,5 +27,10 @@ var refresh = function () {
 
 $(document).ready(function() {
   refresh();  
+  $('.db').click(function(event){
+    if(id!=0){
+      BD.insert({count:1}).done(refresh);
+    }
+  })
 })
 
