@@ -1,4 +1,5 @@
 var id = 0;
+var count = 0;
 var BD = {
   getData: function() {
     return $.getJSON('/api/v1/db');
@@ -20,18 +21,20 @@ var refresh = function () {
   BD.getData().done(function (json) {
     json.db.forEach(function(db) {
       id = db.id;
-      $('#bd').text(db.count);
+      count = db.count;
+      $('#db').text(count);
     });
   })
 };
 
 $(document).ready(function() {
   refresh();
-  $('.db').click(function(event){
-    if(id!=0){
+  $('#db').click(function(event){
+    if(id==0){
       BD.insert({count:1}).done(refresh);
       return;
     }
-    BD.update(id, {count: count});
+    count++;
+    BD.update(id, {count: count}).done(refresh);
   })
 })
