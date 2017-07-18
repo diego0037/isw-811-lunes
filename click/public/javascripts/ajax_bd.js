@@ -14,3 +14,12 @@ var BD = {
     });
   }
 };
+
+var refresh = function () {
+  BD.getData().done(function (json) {
+    json.db.forEach(function(db) {
+     $('#bd').text(db.count); 
+    });
+  })
+}
+
