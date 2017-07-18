@@ -1,9 +1,9 @@
 function setCookie( cvalue) {
-    document.cookie = "cliks=" + cvalue + "; expires=Thu, 18 Dec 2024 12:00:00 UTC; path=/";
+    document.cookie = "clicks=" + cvalue + "; expires=Thu, 18 Dec 2024 12:00:00 UTC; path=/";
 }
 
 function getCookie() {
-    var name = "cliks=";
+    var name = "clicks=";
     var decodedCookie = decodeURIComponent(document.cookie);
     var ca = decodedCookie.split(';');
     for(var i = 0; i <ca.length; i++) {
@@ -17,3 +17,9 @@ function getCookie() {
     }
     return "";
 }
+
+$("#btncookies").click(function() {
+    var clicks=getCookie();
+    var new_val = parseInt(clicks)+1
+    setCookie(new_val);
+});
