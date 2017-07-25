@@ -7,11 +7,7 @@ router.get('/cookie/:contador',function(req, res){
 });
 
 router.get('/', function(req, res) {
-    res.format({
-    json: function () {
-    res.json({cookies: req.cookies.contador});;
-    },
-  });
+    res.json({cookies: req.cookies.contador});
 });
 
 router.get('/clearcookie', function(req,res){
