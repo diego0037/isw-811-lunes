@@ -22,14 +22,15 @@ var refresh = function () {
     json.clicks.forEach(function(click) {
       id = click.id;
       count = click.count;
-      $('#click').text(count);
+      $('#clickdb').text(count);
     });
   })
 };
 
 $(document).ready(function() {
   refresh();
-  $('#click').click(function(event){
+
+  $('#clickdb').click(function(event){
     if(id==0){
       Clicks.insert({count:1}).done(refresh);
       return;
@@ -37,7 +38,7 @@ $(document).ready(function() {
     count++;
     Clicks.update(id, {count: count}).done(refresh);
   });
-  $('#click_reset').click(function(event){
+  $('#click_reset_db').click(function(event){
     Clicks.update(id, {count: 0}).done(refresh);
   });
 })
